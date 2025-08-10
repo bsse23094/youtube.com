@@ -1,138 +1,210 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #0f0f0f;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mustafa Adyan Gaming - YouTube</title>
-    <!-- Font Awesome for YouTube icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* YouTube's exact font */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        /* Mobile-first styles */
+        :root {
+            --yt-dark: #0f0f0f;
+            --yt-dark-2: #181818;
+            --yt-dark-3: #202020;
+            --yt-dark-4: #272727;
+            --yt-dark-5: #303030;
+            --yt-text-primary: #f1f1f1;
+            --yt-text-secondary: #aaa;
+            --yt-red: #ff0000;
+            --yt-blue: #3ea6ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
         
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #0f0f0f;
-            color: #f1f1f1;
-            margin: 0;
-            padding: 0;
+            background-color: var(--yt-dark);
+            color: var(--yt-text-primary);
+            line-height: 1.4;
+            overflow-x: hidden;
+            touch-action: pan-y;
         }
+        
+        /* Header - Mobile Optimized */
         .yt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 16px;
-            height: 56px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: #0f0f0f;
+            height: 56px;
+            background-color: var(--yt-dark);
+            border-bottom: 1px solid var(--yt-dark-5);
             z-index: 1000;
-            border-bottom: 1px solid #303030;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            justify-content: space-between;
         }
         
-        /* YouTube logo styling */
-        .youtube-logo-container {
+        .logo-container {
             display: flex;
             align-items: center;
         }
         
-        .youtube-logo-img {
-            height: 30px;
-            margin-right: 8px;
+        .youtube-logo {
+            height: 20px;
+            width: auto;
         }
         
-        /* Rest of your existing styles... */
-        .channel-header {
-            padding-top: 80px;
-            background: linear-gradient(180deg, #0f0f0f 60%, rgba(0,0,0,0.8) 100%);
+        .header-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
         }
         
-        /* Channel page styling to match YouTube exactly */
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--yt-text-primary);
+        }
+        
+        /* Channel Header */
         .channel-header {
-            padding-top: 80px;
-            background: linear-gradient(180deg, #0f0f0f 60%, rgba(0,0,0,0.8) 100%);
+            padding-top: 56px;
+            background: linear-gradient(to bottom, var(--yt-dark) 60%, rgba(0,0,0,0.8) 100%);
         }
         
         .channel-banner {
             width: 100%;
-            height: 200px;
-            background-color: #181818;
+            height: 120px;
+            background-color: var(--yt-dark-2);
         }
         
-        .channel-info-container {
+        .channel-info {
+            padding: 16px;
             display: flex;
-            padding: 16px 24px;
+            gap: 16px;
         }
         
         .channel-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            margin-right: 24px;
-            border: 2px solid #303030;
+            border: 2px solid var(--yt-dark-5);
             object-fit: cover;
         }
         
+        .channel-details {
+            flex: 1;
+        }
+        
         .channel-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 8px 0;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .verified-badge {
+            color: var(--yt-text-secondary);
+            font-size: 14px;
         }
         
         .channel-stats {
-            color: #aaa;
-            font-size: 14px;
+            color: var(--yt-text-secondary);
+            font-size: 13px;
+            margin-bottom: 12px;
         }
         
         .subscribe-button {
-            background-color: #303030;
+            background-color: var(--yt-red);
             color: white;
             border: none;
             border-radius: 18px;
-            padding: 10px 16px;
+            padding: 8px 16px;
             font-weight: 500;
             font-size: 14px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: background-color 0.2s;
+            width: 100%;
+            justify-content: center;
         }
         
         .subscribe-button.subscribed {
-            background-color: #272727;
-            color: #aaa;
+            background-color: var(--yt-dark-5);
+            color: var(--yt-text-primary);
         }
         
-        .subscribe-button.subscribed:hover {
-            background-color: #3d3d3d;
+        /* Channel Tabs */
+        .channel-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--yt-dark-5);
+            padding: 0 16px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
         
-        .subscribe-button .bell-icon {
-            font-size: 16px;
+        .channel-tabs::-webkit-scrollbar {
+            display: none;
         }
         
-        /* Video grid styling */
-        .video-grid {
+        .tab {
+            padding: 16px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--yt-text-secondary);
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--yt-text-primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 12px;
+            right: 12px;
+            height: 3px;
+            background-color: var(--yt-text-primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        /* Videos Grid - Mobile Optimized */
+        .videos-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: 1fr;
             gap: 16px;
-            padding: 24px;
+            padding: 16px;
         }
         
         .video-item {
-            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
         
         .video-thumbnail {
+            position: relative;
             width: 100%;
             aspect-ratio: 16/9;
-            background-color: #252525;
             border-radius: 8px;
-            position: relative;
             overflow: hidden;
+            background-color: var(--yt-dark-3);
         }
         
         .video-thumbnail img {
@@ -155,15 +227,19 @@
         .video-info {
             display: flex;
             margin-top: 12px;
+            gap: 12px;
         }
         
-        .video-avatar {
+        .video-channel-icon {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            margin-right: 12px;
-            background-color: #303030;
+            background-color: var(--yt-dark-3);
             object-fit: cover;
+        }
+        
+        .video-details {
+            flex: 1;
         }
         
         .video-title {
@@ -177,36 +253,17 @@
         }
         
         .video-meta {
-            color: #aaa;
+            color: var(--yt-text-secondary);
             font-size: 12px;
         }
         
-        /* YouTube logo style */
-        .youtube-logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        
-        .youtube-logo:before {
-            content: "";
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background: red;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        
-        /* Channel profile image below videos */
+        /* Channel Profile Section */
         .channel-profile-section {
             display: flex;
             align-items: center;
-            padding: 16px 24px;
-            border-top: 1px solid #303030;
-            margin-top: 20px;
+            padding: 16px;
+            border-top: 1px solid var(--yt-dark-5);
+            margin-top: 16px;
         }
         
         .channel-profile-image {
@@ -215,170 +272,160 @@
             border-radius: 50%;
             object-fit: cover;
             margin-right: 16px;
-            border: 2px solid #303030;
+            border: 2px solid var(--yt-dark-5);
         }
         
         .channel-profile-name {
             font-weight: 500;
             font-size: 16px;
         }
-
-         .search-container {
-            display: flex;
-            flex: 0 1 640px;
-            margin: 0 40px;
-        }
-        
-        .search-bar {
-            flex: 1;
-            height: 40px;
-            padding: 0 16px;
-            background-color: #121212;
-            border: 1px solid #303030;
-            border-radius: 20px 0 0 20px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-        
-        .search-bar:focus {
-            border-color: #1c62b9;
-        }
-        
-        .search-button {
-            width: 64px;
-            height: 40px;
-            background-color: #303030;
-            border: 1px solid #303030;
-            border-left: none;
-            border-radius: 0 20px 20px 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .search-button:hover {
-            background-color: #404040;
-        }
-        
-        .search-icon {
-            color: #aaa;
-            font-size: 18px;
-        }
-        
         
         .channel-profile-subs {
-            color: #aaa;
+            color: var(--yt-text-secondary);
             font-size: 14px;
             margin-top: 4px;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+            .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .channel-banner {
+                height: 150px;
+            }
+        }
+        
+        @media (min-width: 900px) {
+            .videos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .videos-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .channel-banner {
+                height: 200px;
+            }
         }
     </style>
 </head>
 <body>
-   <div class="yt-header">
-        <div class="youtube-logo-container">
-            <img src="White-Youtube-Logo-PNG.png" class="youtube-logo-img" alt="YouTube Logo">
+    <!-- YouTube Header -->
+    <div class="yt-header">
+        <div class="logo-container">
+            <img src="White-Youtube-Logo-PNG.png" class="youtube-logo" alt="YouTube">
         </div>
-        
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search">
-            <button class="search-button">
-                <i class="fas fa-search search-icon"></i>
-            </button>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #303030; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-bell" style="color: white; font-size: 18px;"></i>
+        <div class="header-icons">
+            <div class="header-icon">
+                <i class="fas fa-search"></i>
             </div>
-        </div>
-    </div>
-    <!-- Channel Header -->
-    <div class="channel-header">
-        <div class="channel-banner"></div>
-        <div class="channel-info-container">
-            <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="channel-avatar" id="channel-avatar">
-            <div style="flex-grow: 1;">
-                <div class="channel-title">Mustafa Adyan Gaming <span style="color: #aaa; font-size: 14px;">✓</span></div>
-                <div class="channel-stats">@MustafaAdyanGaming • 1.02M subscribers • 4 videos</div>
-                <div style="margin-top: 12px; display: flex; gap: 8px;">
-                    <button class="subscribe-button subscribed">
-                        <span>SUBSCRIBED</span>
-                        <i class="fas fa-bell bell-icon"></i>
-                    </button>
-                </div>
+            <div class="header-icon">
+                <i class="fas fa-ellipsis-vertical"></i>
             </div>
         </div>
     </div>
 
-    <!-- Videos -->
-    <div class="video-grid">
+    <!-- Channel Header -->
+    <div class="channel-header">
+        <div class="channel-banner"></div>
+        <div class="channel-info">
+            <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="channel-avatar" alt="Mustafa Adyan Gaming">
+            <div class="channel-details">
+                <h1 class="channel-title">
+                    Mustafa Adyan Gaming <span class="verified-badge">✓</span>
+                </h1>
+                <div class="channel-stats">@MustafaAdyanGaming • 1.02M subscribers • 4 videos</div>
+                <button class="subscribe-button subscribed">
+                    <span>SUBSCRIBED</span>
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Channel Tabs -->
+        <div class="channel-tabs">
+            <div class="tab active">Home</div>
+            <div class="tab">Videos</div>
+            <div class="tab">Shorts</div>
+            <div class="tab">Live</div>
+            <div class="tab">Playlists</div>
+            <div class="tab">Community</div>
+            <div class="tab">Channels</div>
+            <div class="tab">About</div>
+        </div>
+    </div>
+
+    <!-- Videos Grid -->
+    <div class="videos-grid">
         <!-- Video 1 -->
-        <div class="video-item">
+        <a href="#" class="video-item">
             <div class="video-thumbnail">
-                <img src="bakery.avif" alt="1 Million Subscribers">
+                <img src="bakery.avif" alt="Video thumbnail">
                 <div class="video-duration">10:24</div>
             </div>
             <div class="video-info">
-                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-avatar">
-                <div>
-                    <div class="video-title">This is my favourite game ever made in Roblox</div>
+                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-channel-icon" alt="Channel icon">
+                <div class="video-details">
+                    <h3 class="video-title">This is my favourite game ever made in Roblox</h3>
                     <div class="video-meta">Mustafa Adyan Gaming • 1.2M views • 2 months ago</div>
                 </div>
             </div>
-        </div>
+        </a>
         
         <!-- Video 2 -->
-        <div class="video-item">
+        <a href="#" class="video-item">
             <div class="video-thumbnail">
-                <img src="goat simulator.webp" alt="Minecraft TNT">
+                <img src="goat simulator.webp" alt="Video thumbnail">
                 <div class="video-duration">15:47</div>
             </div>
             <div class="video-info">
-                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-avatar">
-                <div>
-                    <div class="video-title">Did you know that goat simulator had a glitch?</div>
+                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-channel-icon" alt="Channel icon">
+                <div class="video-details">
+                    <h3 class="video-title">Did you know that goat simulator had a glitch?</h3>
                     <div class="video-meta">Mustafa Adyan Gaming • 2.3M views • 2 months ago</div>
                 </div>
             </div>
-        </div>
+        </a>
         
         <!-- Video 3 -->
-        <div class="video-item">
+        <a href="#" class="video-item">
             <div class="video-thumbnail">
-                <img src="roblox glitch.avif" alt="Roblox Brookhaven">
+                <img src="roblox glitch.avif" alt="Video thumbnail">
                 <div class="video-duration">22:12</div>
             </div>
             <div class="video-info">
-                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-avatar">
-                <div>
-                    <div class="video-title">This is how you do a glitch in Roblox horror pizza place</div>
+                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-channel-icon" alt="Channel icon">
+                <div class="video-details">
+                    <h3 class="video-title">This is how you do a glitch in Roblox horror pizza place</h3>
                     <div class="video-meta">Mustafa Adyan Gaming • 1.8M views • 1 month ago</div>
                 </div>
             </div>
-        </div>
+        </a>
         
         <!-- Video 4 -->
-        <div class="video-item">
+        <a href="#" class="video-item">
             <div class="video-thumbnail">
-                <img src="sonic.avif" alt="Fortnite New Season">
+                <img src="sonic.avif" alt="Video thumbnail">
                 <div class="video-duration">8:36</div>
             </div>
             <div class="video-info">
-                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-avatar">
-                <div>
-                    <div class="video-title">Today we are playing 3 sonic games</div>
+                <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="video-channel-icon" alt="Channel icon">
+                <div class="video-details">
+                    <h3 class="video-title">Today we are playing 3 sonic games</h3>
                     <div class="video-meta">Mustafa Adyan Gaming • 3.1M views • 3 months ago</div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <!-- Channel Profile Section -->
     <div class="channel-profile-section">
-        <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="channel-profile-image">
+        <img src="ChatGPT Image Aug 11, 2025, 02_02_40 AM.png" class="channel-profile-image" alt="Channel profile">
         <div>
             <div class="channel-profile-name">Mustafa Adyan Gaming</div>
             <div class="channel-profile-subs">1.02M subscribers</div>
@@ -397,7 +444,7 @@
         }, 3000);
         
         // Bell icon animation
-        const bellIcon = document.querySelector('.subscribe-button .bell-icon');
+        const bellIcon = document.querySelector('.subscribe-button .fa-bell');
         setInterval(() => {
             bellIcon.style.transform = 'rotate(15deg)';
             setTimeout(() => {
@@ -407,6 +454,24 @@
                 }, 100);
             }, 100);
         }, 10000);
+        
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+        
+        // Make video items clickable
+        document.querySelectorAll('.video-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                // In a real implementation, this would open the video
+                alert('Video would play here in a real implementation');
+            });
+        });
     </script>
 </body>
 </html>
